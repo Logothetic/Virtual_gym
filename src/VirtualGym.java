@@ -86,10 +86,7 @@ public class VirtualGym extends JFrame {
 
         createTrainingProgramsButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Creating customized training programs...");
-                // Add code to create training programs
-            }
+            public void actionPerformed(ActionEvent e) { new Program().setVisible(true);}
         });
 
         assessPhysicalConditionButton.addActionListener(new ActionListener() {
