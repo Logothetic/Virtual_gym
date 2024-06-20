@@ -80,9 +80,7 @@ public class VirtualGym extends JFrame {
 
         simulatePurchaseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Simulating purchase of fitness products and programs...");
-                // Add code to simulate purchase
+            public void actionPerformed(ActionEvent e) {new Eshop().setVisible(true);
             }
         });
 
