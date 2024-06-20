@@ -7,9 +7,10 @@ public class VirtualGym extends JFrame {
     public VirtualGym() {
         // Set up the main frame
         setTitle("Virtual Gym");
-        setSize(800, 600); // Increased size for more buttons
+        setSize(800, 600); // Initial size before maximizing
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
         setLayout(new BorderLayout());
 
         // Load the gym icon
@@ -96,16 +97,16 @@ public class VirtualGym extends JFrame {
         assessPhysicalConditionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Assessing physical condition...");
-                // Add code to assess physical condition
+                setVisible(false); // Hide main window
+                new AssessPhysicalConditionWindow(VirtualGym.this).setVisible(true);
             }
         });
 
         interactiveGamesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Starting interactive games...");
-                // Add code for interactive games
+                setVisible(false); // Hide main window
+                new InteractiveGamesWindow(VirtualGym.this).setVisible(true);
             }
         });
 
