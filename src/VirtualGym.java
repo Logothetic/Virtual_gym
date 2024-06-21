@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VirtualGym extends JFrame {
+    private ProgressTracker progressTracker;
+
     public VirtualGym() {
+        progressTracker = new ProgressTracker();
+
         // Set up the main frame
         setTitle("Virtual Gym");
         setSize(800, 600); // Initial size before maximizing
@@ -29,21 +33,22 @@ public class VirtualGym extends JFrame {
 
         JButton exercisesAndAdviceButton = new JButton("Exercises & Advice");
         JButton trackProgressButton = new JButton("Track Progress");
-        JButton interactNutritionistButton = new JButton("Virtual Nutritionist");
-        JButton interactTrainerButton = new JButton("Virtual Trainer");
+        JButton interactNutritionistButton = new JButton("Virtual Nutritionist/Trainer");
         JButton simulatePurchaseButton = new JButton("Simulate Purchase");
         JButton createTrainingProgramsButton = new JButton("Create Training Programs");
         JButton assessPhysicalConditionButton = new JButton("Assess Physical Condition");
         JButton interactiveGamesButton = new JButton("Interactive Games");
+        JButton startWorkoutButton = new JButton("Start Working Out"); // New button
 
         buttonPanel.add(exercisesAndAdviceButton);
         buttonPanel.add(trackProgressButton);
         buttonPanel.add(interactNutritionistButton);
-        buttonPanel.add(interactTrainerButton);
         buttonPanel.add(simulatePurchaseButton);
         buttonPanel.add(createTrainingProgramsButton);
         buttonPanel.add(assessPhysicalConditionButton);
         buttonPanel.add(interactiveGamesButton);
+        buttonPanel.add(startWorkoutButton); // Add new button to the panel
+
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Add action listeners to buttons
@@ -70,26 +75,16 @@ public class VirtualGym extends JFrame {
             }
         });
 
-        interactTrainerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Interacting with virtual trainer...");
-                // Add code for virtual trainer interaction
-            }
-        });
 
         simulatePurchaseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                new Eshop().setVisible(true);
+            public void actionPerformed(ActionEvent e) {new Eshop().setVisible(true);
             }
         });
 
         createTrainingProgramsButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                new Program().setVisible(true);
-            }
+            public void actionPerformed(ActionEvent e) { new Program().setVisible(true);}
         });
 
         assessPhysicalConditionButton.addActionListener(new ActionListener() {
@@ -113,6 +108,30 @@ public class VirtualGym extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Welcome to the gym! Here you can be fit and healthy. Enjoy your workout and have fun!", "Welcome Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        interactNutritionistButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VirtualNutritionistWindow(VirtualGym.this).setVisible(true);
+                setVisible(false);
+            }
+        });
+
+        startWorkoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new WorkoutWindow(VirtualGym.this, progressTracker).setVisible(true);
+                setVisible(false);
+            }
+        });
+
+        trackProgressButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TrackProgressWindow(VirtualGym.this, progressTracker).setVisible(true);
+                setVisible(false);
             }
         });
     }
