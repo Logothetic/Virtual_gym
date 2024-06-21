@@ -80,13 +80,16 @@ public class VirtualGym extends JFrame {
 
         simulatePurchaseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {new Eshop().setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                new Eshop().setVisible(true);
             }
         });
 
         createTrainingProgramsButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { new Program().setVisible(true);}
+            public void actionPerformed(ActionEvent e) {
+                new Program().setVisible(true);
+            }
         });
 
         assessPhysicalConditionButton.addActionListener(new ActionListener() {
