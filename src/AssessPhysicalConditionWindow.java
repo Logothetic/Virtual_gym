@@ -9,19 +9,11 @@ public class AssessPhysicalConditionWindow extends JFrame {
     private JTextField weightField;
     private JTextField ageField;
     private JComboBox<String> genderBox;
-    private JComboBox<String> activityLevelBox;
     private JTextField currentWaterIntakeField;
     private JTextField currentCaloriesField;
     private JTextField exerciseFrequencyField;
     private JTextField exerciseDurationField;
-    private JLabel bmiResultLabel;
-    private JLabel bmrResultLabel;
-    private JLabel bodyFatResultLabel;
-    private JLabel waterIntakeLabel;
-    private JLabel macronutrientLabel;
-    private JLabel fitnessLevelLabel;
-    private JLabel exerciseAdviceLabel;
-    private JLabel adviceLabel;
+    private JTextPane resultTextPane;
     private JFrame mainWindow;
 
     public AssessPhysicalConditionWindow(JFrame mainWindow) {
@@ -34,7 +26,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
 
         // Set background image
-        JLabel background = new JLabel(new ImageIcon("fitness_assessment.jpg"));
+        JLabel background = new JLabel(new ImageIcon("C:\\Users\\Odysseas\\IdeaProjects\\Virtual\\fitness_assessment.jpg"));
         background.setLayout(new GridBagLayout());
         setContentPane(background);
 
@@ -44,32 +36,16 @@ public class AssessPhysicalConditionWindow extends JFrame {
         ageField = new JTextField(10);
         String[] genders = {"Male", "Female"};
         genderBox = new JComboBox<>(genders);
-        String[] activityLevels = {"Sedentary", "Lightly active", "Moderately active", "Very active", "Extra active"};
-        activityLevelBox = new JComboBox<>(activityLevels);
         currentWaterIntakeField = new JTextField(10);
         currentCaloriesField = new JTextField(10);
         exerciseFrequencyField = new JTextField(10);
         exerciseDurationField = new JTextField(10);
-        bmiResultLabel = new JLabel("");
-        bmrResultLabel = new JLabel("");
-        bodyFatResultLabel = new JLabel("");
-        waterIntakeLabel = new JLabel("");
-        macronutrientLabel = new JLabel("");
-        fitnessLevelLabel = new JLabel("");
-        exerciseAdviceLabel = new JLabel("");
-        adviceLabel = new JLabel("<html><body style='width: 250px'></body></html>");
+        resultTextPane = new JTextPane();
+        resultTextPane.setContentType("text/html");
+        resultTextPane.setEditable(false);
 
         // Set font styles
-        Font labelFont = new Font("Arial", Font.BOLD, 14);
-        Font resultFont = new Font("Arial", Font.PLAIN, 14);
-        bmiResultLabel.setFont(resultFont);
-        bmrResultLabel.setFont(resultFont);
-        bodyFatResultLabel.setFont(resultFont);
-        waterIntakeLabel.setFont(resultFont);
-        macronutrientLabel.setFont(resultFont);
-        fitnessLevelLabel.setFont(resultFont);
-        exerciseAdviceLabel.setFont(resultFont);
-        adviceLabel.setFont(resultFont);
+        Font labelFont = new Font("Arial", Font.PLAIN, 14);
 
         // Create and add components to the panel
         JPanel panel = new JPanel();
@@ -119,23 +95,14 @@ public class AssessPhysicalConditionWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.EAST;
-        panel.add(createLabel("Activity Level:", labelFont), gbc);
-
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel.add(activityLevelBox, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.anchor = GridBagConstraints.EAST;
-        panel.add(createLabel("Current Daily Water Intake (liters):", labelFont), gbc);
+        panel.add(createLabel("Current Daily Water Intake (ml):", labelFont), gbc);
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
         panel.add(currentWaterIntakeField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 5;
         gbc.anchor = GridBagConstraints.EAST;
         panel.add(createLabel("Current Daily Calorie Intake (kcal):", labelFont), gbc);
 
@@ -144,7 +111,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
         panel.add(currentCaloriesField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 7;
+        gbc.gridy = 6;
         gbc.anchor = GridBagConstraints.EAST;
         panel.add(createLabel("Exercise Frequency (days/week):", labelFont), gbc);
 
@@ -153,7 +120,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
         panel.add(exerciseFrequencyField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 8;
+        gbc.gridy = 7;
         gbc.anchor = GridBagConstraints.EAST;
         panel.add(createLabel("Exercise Duration (minutes/day):", labelFont), gbc);
 
@@ -166,7 +133,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
         calculateButton.setBackground(new Color(70, 130, 180));
         calculateButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
-        gbc.gridy = 9;
+        gbc.gridy = 8;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(calculateButton, gbc);
@@ -175,50 +142,19 @@ public class AssessPhysicalConditionWindow extends JFrame {
         backButton.setFont(labelFont);
         backButton.setBackground(new Color(70, 130, 180));
         backButton.setForeground(Color.WHITE);
-        gbc.gridy = 10;
+        gbc.gridy = 9;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(backButton, gbc);
 
-        gbc.gridy = 11;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(bmiResultLabel, gbc);
+        // Add the result text pane to a scroll pane
+        JScrollPane scrollPane = new JScrollPane(resultTextPane);
+        scrollPane.setPreferredSize(new Dimension(700, 300));
 
-        gbc.gridy = 12;
+        gbc.gridy = 10;
         gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(bmrResultLabel, gbc);
-
-        gbc.gridy = 13;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(bodyFatResultLabel, gbc);
-
-        gbc.gridy = 14;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(waterIntakeLabel, gbc);
-
-        gbc.gridy = 15;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(macronutrientLabel, gbc);
-
-        gbc.gridy = 16;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(fitnessLevelLabel, gbc);
-
-        gbc.gridy = 17;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(exerciseAdviceLabel, gbc);
-
-        gbc.gridy = 18;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(adviceLabel, gbc);
+        gbc.fill = GridBagConstraints.BOTH;
+        panel.add(scrollPane, gbc);
 
         // Add the panel to the background
         gbc = new GridBagConstraints();
@@ -255,7 +191,6 @@ public class AssessPhysicalConditionWindow extends JFrame {
             double weight = Double.parseDouble(weightField.getText());
             int age = Integer.parseInt(ageField.getText());
             String gender = (String) genderBox.getSelectedItem();
-            String activityLevel = (String) activityLevelBox.getSelectedItem();
             double currentWaterIntake = Double.parseDouble(currentWaterIntakeField.getText());
             double currentCalories = Double.parseDouble(currentCaloriesField.getText());
             int exerciseFrequency = Integer.parseInt(exerciseFrequencyField.getText());
@@ -264,35 +199,58 @@ public class AssessPhysicalConditionWindow extends JFrame {
             // Calculate BMI
             double bmi = weight / (height * height);
             String bmiCategory = getBMICategory(bmi);
-            bmiResultLabel.setText(String.format("Your BMI is: %.2f - %s", bmi, bmiCategory));
+            String bmiText = String.format("Your BMI is: %.2f - %s", bmi, bmiCategory);
 
             // Calculate BMR
             double bmr = calculateBMR(height, weight, age, gender);
-            bmrResultLabel.setText(String.format("Your BMR is: %.2f calories/day", bmr));
+            String bmrText = String.format("Your BMR is: %.2f calories/day", bmr);
 
             // Calculate Body Fat Percentage
             double bodyFat = calculateBodyFatPercentage(bmi, age, gender);
-            bodyFatResultLabel.setText(String.format("Your Body Fat Percentage is: %.2f%%", bodyFat));
+            String bodyFatText = String.format("Your Body Fat Percentage is: %.2f%%", bodyFat);
 
             // Calculate Water Intake
             double recommendedWaterIntake = calculateWaterIntake(weight);
-            waterIntakeLabel.setText(String.format("Recommended Daily Water Intake: %.2f liters", recommendedWaterIntake));
+            String waterIntakeText = String.format("Recommended Daily Water Intake: %.2f ml", recommendedWaterIntake);
 
             // Calculate Macronutrient Distribution
-            String macronutrientDistribution = calculateMacronutrientDistribution(bmr, activityLevel);
-            macronutrientLabel.setText("<html><body style='width: 250px'>" + macronutrientDistribution + "</body></html>");
+            String macronutrientDistribution = calculateMacronutrientDistribution(bmr);
+            String macronutrientText = "Recommended Daily Macronutrient Intake:<br>" + macronutrientDistribution;
 
             // Assess Fitness Level
             String fitnessLevel = assessFitnessLevel(bmiCategory, bodyFat);
-            fitnessLevelLabel.setText("Fitness Level: " + fitnessLevel);
+            String fitnessLevelText = "Fitness Level: " + fitnessLevel;
 
             // Provide Exercise Advice
             String exerciseAdvice = provideExerciseAdvice(exerciseFrequency, exerciseDuration);
-            exerciseAdviceLabel.setText("<html><body style='width: 250px'>" + exerciseAdvice + "</body></html>");
+            String exerciseAdviceText = "Exercise Advice:<br>" + exerciseAdvice;
 
             // Provide Health Advice
-            String advice = provideHealthAdvice(bmiCategory, currentWaterIntake, recommendedWaterIntake, currentCalories, bmr);
-            adviceLabel.setText(String.format("<html><body style='width: 250px'>%s</body></html>", advice));
+            String healthAdvice = provideHealthAdvice(bmiCategory, currentWaterIntake, recommendedWaterIntake, currentCalories, bmr);
+
+            // Calculate Calorie Difference
+            double moderateActivityBmr = bmr * 1.55;
+            double calorieDifference = currentCalories - moderateActivityBmr;
+            String calorieDifferenceText = String.format("Your daily calorie intake is %.2f calories %s than your daily requirement.",
+                    Math.abs(calorieDifference), calorieDifference > 0 ? "more" : "less");
+
+            // Combine all results into a single HTML string with improved styling
+            String resultText = String.format(
+                    "<html><body style='font-family: Arial; font-size: 12px; line-height: 1.6; padding: 10px;'>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "<div style='margin-bottom: 10px;'>%s</div>"
+                            + "</body></html>",
+                    bmiText, bmrText, bodyFatText, waterIntakeText, macronutrientText, fitnessLevelText, exerciseAdviceText, healthAdvice, calorieDifferenceText);
+
+            // Set the result text pane with the combined results
+            resultTextPane.setText(resultText);
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Please enter valid numbers for height, weight, age, water intake, calorie intake, exercise frequency, and exercise duration.");
@@ -330,39 +288,17 @@ public class AssessPhysicalConditionWindow extends JFrame {
     }
 
     private double calculateWaterIntake(double weight) {
-        // Recommended water intake in liters
-        return weight * 0.033;
+        // Recommended water intake in milliliters
+        return weight * 33;
     }
 
-    private String calculateMacronutrientDistribution(double bmr, String activityLevel) {
-        double activityMultiplier;
-
-        switch (activityLevel) {
-            case "Sedentary":
-                activityMultiplier = 1.2;
-                break;
-            case "Lightly active":
-                activityMultiplier = 1.375;
-                break;
-            case "Moderately active":
-                activityMultiplier = 1.55;
-                break;
-            case "Very active":
-                activityMultiplier = 1.725;
-                break;
-            case "Extra active":
-                activityMultiplier = 1.9;
-                break;
-            default:
-                activityMultiplier = 1.2;
-        }
-
-        double dailyCalories = bmr * activityMultiplier;
+    private String calculateMacronutrientDistribution(double bmr) {
+        double dailyCalories = bmr * 1.55;
         double carbs = dailyCalories * 0.5 / 4; // 50% of calories from carbs, 4 kcal/g
         double proteins = dailyCalories * 0.3 / 4; // 30% of calories from proteins, 4 kcal/g
         double fats = dailyCalories * 0.2 / 9; // 20% of calories from fats, 9 kcal/g
 
-        return String.format("Recommended Daily Macronutrient Intake:\nCarbohydrates: %.2f grams\nProteins: %.2f grams\nFats: %.2f grams",
+        return String.format("Carbohydrates: %.2f grams<br>Proteins: %.2f grams<br>Fats: %.2f grams",
                 carbs, proteins, fats);
     }
 
@@ -390,37 +326,37 @@ public class AssessPhysicalConditionWindow extends JFrame {
 
     private String provideHealthAdvice(String bmiCategory, double currentWaterIntake, double recommendedWaterIntake, double currentCalories, double bmr) {
         StringBuilder advice = new StringBuilder();
-        advice.append("Health Advice:\n");
+        advice.append("Health Advice:<br>");
 
         switch (bmiCategory) {
             case "Underweight":
-                advice.append("You are underweight. Consider consulting a nutritionist to help you reach a healthier weight. Ensure you eat a balanced diet with enough calories.\n");
+                advice.append("You are underweight. Consider consulting a nutritionist to help you reach a healthier weight. Ensure you eat a balanced diet with enough calories.<br>");
                 break;
             case "Normal weight":
-                advice.append("You have a normal weight. Keep up the good work! Maintain a balanced diet and regular physical activity to stay healthy.\n");
+                advice.append("You have a normal weight. Keep up the good work! Maintain a balanced diet and regular physical activity to stay healthy.<br>");
                 break;
             case "Overweight":
-                advice.append("You are overweight. Consider adopting a healthier diet and increasing your physical activity. Consulting a healthcare provider can also help you develop a plan.\n");
+                advice.append("You are overweight. Consider adopting a healthier diet and increasing your physical activity. Consulting a healthcare provider can also help you develop a plan.<br>");
                 break;
             case "Obesity":
-                advice.append("You are in the obesity range. It's important to consult a healthcare provider to create a plan for weight loss and to check for any related health issues.\n");
+                advice.append("You are in the obesity range. It's important to consult a healthcare provider to create a plan for weight loss and to check for any related health issues.<br>");
                 break;
             default:
-                advice.append("Error in providing advice.\n");
+                advice.append("Error in providing advice.<br>");
         }
 
         if (currentWaterIntake < recommendedWaterIntake) {
-            advice.append(String.format("You should increase your water intake to at least %.2f liters per day.\n", recommendedWaterIntake));
+            advice.append(String.format("You should increase your water intake to at least %.2f ml per day.<br>", recommendedWaterIntake));
         } else {
-            advice.append("Your water intake is sufficient.\n");
+            advice.append("Your water intake is sufficient.<br>");
         }
 
         if (currentCalories < bmr) {
-            advice.append("You should increase your calorie intake to meet your Basal Metabolic Rate (BMR).\n");
+            advice.append("You should increase your calorie intake to meet your Basal Metabolic Rate (BMR).<br>");
         } else if (currentCalories > bmr * 1.2) {
-            advice.append("You should decrease your calorie intake to avoid consuming excessive calories.\n");
+            advice.append("You should decrease your calorie intake to avoid consuming excessive calories.<br>");
         } else {
-            advice.append("Your calorie intake is within a healthy range.\n");
+            advice.append("Your calorie intake is within a healthy range.<br>");
         }
 
         return advice.toString();
