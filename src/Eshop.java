@@ -10,13 +10,14 @@ public class Eshop extends JFrame {
     private JComboBox<Integer>[] quantitySelectors;
 
     public Eshop() {
+
         setTitle("Virtual Gym Eshop");
         setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(6, 3, 10, 10));
+        mainPanel.setLayout(new GridLayout(7, 3, 10, 10)); // Adjusted for the back button
 
         // Product names
         String[] productNames = {
@@ -70,6 +71,19 @@ public class Eshop extends JFrame {
             mainPanel.add(quantitySelectors[i]);
             mainPanel.add(purchaseButtons[i]);
         }
+
+        // Add the back button
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                dispose();
+            }
+        });
+        mainPanel.add(new JLabel("")); // Placeholder for alignment
+        mainPanel.add(backButton);
+        mainPanel.add(new JLabel("")); // Placeholder for alignment
 
         add(mainPanel);
     }

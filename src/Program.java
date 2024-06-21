@@ -10,6 +10,7 @@ public class Program extends JFrame {
     private JComboBox<String> goalComboBox;
     private JTextArea outputArea;
     private JButton generateButton;
+    private JButton exitButton;  // Define the exit button
     private JLabel errorLabel;
 
     public Program() {
@@ -54,6 +55,15 @@ public class Program extends JFrame {
             }
         });
 
+        // Exit button
+        exitButton = new JButton("Exit");
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
+
         // Add components to the main panel
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -81,14 +91,18 @@ public class Program extends JFrame {
         mainPanel.add(generateButton, gbc);
 
         gbc.gridx = 1;
-        mainPanel.add(errorLabel, gbc);
+        mainPanel.add(exitButton, gbc);  // Add the exit button
 
         gbc.gridx = 0;
         gbc.gridy = 4;
+        mainPanel.add(errorLabel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         mainPanel.add(outputLabel, gbc);
 
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         mainPanel.add(new JScrollPane(outputArea), gbc);
 
         add(mainPanel);
