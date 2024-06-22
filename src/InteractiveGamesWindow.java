@@ -3,10 +3,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 public class InteractiveGamesWindow extends JFrame {
     private JFrame mainWindow;
+    private BufferedImage backgroundImage;
 
     public InteractiveGamesWindow(JFrame mainWindow) {
         this.mainWindow = mainWindow;
@@ -14,22 +19,23 @@ public class InteractiveGamesWindow extends JFrame {
         setTitle("Interactive Games and Exercises");
         setSize(800, 600); // Initial size before maximizing
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure the application exits on close
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
 
+        // Load background image
+        try {
+            backgroundImage = ImageIO.read(new File("interactive_games.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Set background image
-        JLabel background = new JLabel(new ImageIcon(new ImageIcon("C:\\Users\\Odysseas\\IdeaProjects\\Virtual\\interactive_games.jpg").getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH)));
+        JLabel background = new JLabel(new ImageIcon(backgroundImage));
         background.setLayout(new GridBagLayout());
         setContentPane(background);
 
-        // Create and add components to the panel
-        JPanel panel = new JPanel();
-        panel.setOpaque(true); // Ensure panel is not transparent
-        panel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background for better contrast
-        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        panel.setLayout(new GridBagLayout());
-
-        Font labelFont = new Font("Arial", Font.BOLD, 24);
+        // Initialize components
+        Font labelFont = new Font("Arial", Font.BOLD, 26);
         Font buttonFont = new Font("Arial", Font.PLAIN, 18);
 
         JLabel titleLabel = new JLabel("Interactive Games and Exercises");
@@ -37,11 +43,17 @@ public class InteractiveGamesWindow extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JButton game4Button = createStyledButton("Game 1: Reaction Time", buttonFont);
-        JButton game5Button = createStyledButton("Game 2: Memory Sequence Game", buttonFont);
-        JButton game6Button = createStyledButton("Game 3: Simple Reflex Game", buttonFont);
-        JButton game7Button = createStyledButton("Game 4: Jumping Jacks Challenge", buttonFont);
+        JButton game1Button = createStyledButton("Game 1: Reaction Time", buttonFont);
+        JButton game2Button = createStyledButton("Game 2: Memory Sequence Game", buttonFont);
+        JButton game3Button = createStyledButton("Game 3: Simple Reflex Game", buttonFont);
         JButton backButton = createStyledButton("Back", buttonFont);
+
+        // Create and add components to the panel
+        JPanel panel = new JPanel();
+        panel.setOpaque(true); // Ensure panel is not transparent
+        panel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background for better contrast
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        panel.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -53,66 +65,50 @@ public class InteractiveGamesWindow extends JFrame {
 
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(game4Button, gbc);
+        panel.add(game1Button, gbc);
 
         gbc.gridy = 2;
-        panel.add(game5Button, gbc);
+        panel.add(game2Button, gbc);
 
         gbc.gridy = 3;
-        panel.add(game6Button, gbc);
+        panel.add(game3Button, gbc);
 
         gbc.gridy = 4;
-        panel.add(game7Button, gbc);
-
-        gbc.gridy = 5;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(backButton, gbc);
 
-        // Center the panel in the background
+        // Add the panel to the background
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.CENTER;
         background.add(panel, gbc);
 
         // Add action listeners to buttons
-        game4Button.addActionListener(new ActionListener() {
+        game1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showAdvancedReactionTimeGame();
             }
         });
 
-        game5Button.addActionListener(new ActionListener() {
+        game2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showMemorySequenceGame();
             }
         });
 
-        game6Button.addActionListener(new ActionListener() {
+        game3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showSimpleReflexGame();
             }
         });
 
-        game7Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showJumpingJacksChallenge();
-            }
-        });
-
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainWindow.setVisible(true);
+                if (mainWindow != null) {
+                    mainWindow.setVisible(true);
+                }
                 dispose();
             }
         });
@@ -125,6 +121,8 @@ public class InteractiveGamesWindow extends JFrame {
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        button.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
+        button.setPreferredSize(new Dimension(300, 50)); // Ensure consistent button size
         return button;
     }
 
@@ -138,8 +136,9 @@ public class InteractiveGamesWindow extends JFrame {
         memoryPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
 
         JLabel instructions = new JLabel("Remember the sequence of colors:");
-        instructions.setFont(new Font("Arial", Font.BOLD, 18));
+        instructions.setFont(new Font("Arial", Font.BOLD, 20));
         instructions.setForeground(Color.WHITE);
+        instructions.setHorizontalAlignment(SwingConstants.CENTER);
 
         JButton[] sequenceButtons = new JButton[4];
         for (int i = 0; i < 4; i++) {
@@ -257,8 +256,10 @@ public class InteractiveGamesWindow extends JFrame {
         reactionPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
 
         JLabel instructions = new JLabel("Click the button that lights up as fast as you can!");
-        instructions.setFont(new Font("Arial", Font.BOLD, 18));
+        instructions.setFont(new Font("Arial", Font.BOLD, 16));
         instructions.setForeground(Color.WHITE);
+        instructions.setHorizontalAlignment(SwingConstants.CENTER);
+        instructions.setPreferredSize(new Dimension(350, 30)); // Ensure instructions fit within the frame
 
         JButton[] buttons = new JButton[4];
         for (int i = 0; i < 4; i++) {
@@ -273,11 +274,13 @@ public class InteractiveGamesWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER; // Center align instructions
         reactionPanel.add(instructions, gbc);
 
         for (int i = 0; i < 4; i++) {
             gbc.gridy = i + 1;
             gbc.gridwidth = 1;
+            gbc.anchor = GridBagConstraints.CENTER; // Center align buttons
             reactionPanel.add(buttons[i], gbc);
         }
 
@@ -325,8 +328,10 @@ public class InteractiveGamesWindow extends JFrame {
         reflexPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
 
         JLabel instructions = new JLabel("Click the button when it changes color!");
-        instructions.setFont(new Font("Arial", Font.BOLD, 18));
+        instructions.setFont(new Font("Arial", Font.BOLD, 20));
         instructions.setForeground(Color.WHITE);
+        instructions.setHorizontalAlignment(SwingConstants.CENTER);
+
         JButton reflexButton = new JButton("Wait...");
         reflexButton.setFont(new Font("Arial", Font.BOLD, 24));
         reflexButton.setBackground(Color.RED);
@@ -372,72 +377,6 @@ public class InteractiveGamesWindow extends JFrame {
                 ex.printStackTrace();
             }
         }).start();
-    }
-
-    private void showJumpingJacksChallenge() {
-        JFrame jumpingJacksFrame = new JFrame("Jumping Jacks Challenge");
-        jumpingJacksFrame.setSize(400, 300);
-        jumpingJacksFrame.setLocationRelativeTo(this);
-
-        JPanel jumpingJacksPanel = new JPanel();
-        jumpingJacksPanel.setLayout(new GridBagLayout());
-        jumpingJacksPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
-
-        JLabel instructions = new JLabel("Perform as many jumping jacks as you can in 30 seconds!");
-        instructions.setFont(new Font("Arial", Font.BOLD, 18));
-        instructions.setForeground(Color.WHITE);
-        instructions.setHorizontalAlignment(SwingConstants.CENTER); // Center the text
-        JLabel countLabel = new JLabel("Count: 0");
-        countLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        countLabel.setForeground(Color.WHITE);
-        countLabel.setHorizontalAlignment(SwingConstants.CENTER); // Center the text
-        JButton incrementButton = new JButton("Jump!");
-        incrementButton.setPreferredSize(new Dimension(200, 50)); // Set preferred size
-        incrementButton.setFont(new Font("Arial", Font.BOLD, 24));
-        incrementButton.setBackground(new Color(70, 130, 180));
-        incrementButton.setForeground(Color.WHITE);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        jumpingJacksPanel.add(instructions, gbc);
-
-        gbc.gridy = 1;
-        jumpingJacksPanel.add(countLabel, gbc);
-
-        gbc.gridy = 2;
-        gbc.gridwidth = 2; // Span both columns
-        gbc.fill = GridBagConstraints.NONE; // Adjust fill
-        jumpingJacksPanel.add(incrementButton, gbc);
-
-        jumpingJacksFrame.add(jumpingJacksPanel);
-        jumpingJacksFrame.setVisible(true);
-
-        incrementButton.addActionListener(new ActionListener() {
-            int count = 0;
-            Timer timer = new Timer(30000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    incrementButton.setEnabled(false);
-                    JOptionPane.showMessageDialog(jumpingJacksFrame,
-                            "Time's up! You did " + count + " jumping jacks.",
-                            "Challenge Over", JOptionPane.INFORMATION_MESSAGE);
-                    jumpingJacksFrame.dispose();
-                }
-            });
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (count == 0) {
-                    timer.start();
-                }
-                count++;
-                countLabel.setText("Count: " + count);
-            }
-        });
     }
 
     public static void main(String[] args) {
