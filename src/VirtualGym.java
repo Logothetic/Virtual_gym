@@ -75,16 +75,18 @@ public class VirtualGym extends JFrame {
             }
         });
 
-
         simulatePurchaseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {new Eshop().setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                new Eshop().setVisible(true);
             }
         });
 
         createTrainingProgramsButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { new Program().setVisible(true);}
+            public void actionPerformed(ActionEvent e) {
+                new Program().setVisible(true);
+            }
         });
 
         assessPhysicalConditionButton.addActionListener(new ActionListener() {
@@ -107,9 +109,29 @@ public class VirtualGym extends JFrame {
         readMeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Welcome to the gym! Here you can be fit and healthy. Enjoy your workout and have fun!", "Welcome Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "Οδηγίες Χρήσης Εφαρμογής:\n\n" +
+                                "1. Exercises & Advice:\n" +
+                                "   - Πατήστε το κουμπί 'Exercises & Advice'. Θα ανοίξει ένα νέο παράθυρο που περιέχει μια λίστα από ασκήσεις και συμβουλές διατροφής. Μπορείτε να διαβάσετε και να ακολουθήσετε αυτές τις συμβουλές για καλύτερα αποτελέσματα.\n\n" +
+                                "2. Track Progress:\n" +
+                                "   - Πατήστε το κουμπί 'Track Progress'. Θα ανοίξει ένα παράθυρο παρακολούθησης προόδου. Εκεί μπορείτε να εισάγετε τα δεδομένα της προπόνησής σας και να παρακολουθείτε την πρόοδό σας με την πάροδο του χρόνου.\n\n" +
+                                "3. Virtual Nutritionist/Trainer:\n" +
+                                "   - Πατήστε το κουμπί 'Virtual Nutritionist/Trainer'. Θα ανοίξει ένα ερωτηματολόγιο. Απαντήστε στις ερωτήσεις σχετικά με τις διατροφικές σας συνήθειες και στόχους. Μετά την ολοκλήρωση, θα λάβετε εξατομικευμένες προτάσεις διατροφής και προπόνησης.\n\n" +
+                                "4. Simulate Purchase:\n" +
+                                "   - Πατήστε το κουμπί 'Simulate Purchase'. Θα ανοίξει ένα παράθυρο καταστήματος. Μπορείτε να περιηγηθείτε στα διαθέσιμα προϊόντα, να επιλέξετε την ποσότητα και να προσομοιώσετε μια αγορά.\n\n" +
+                                "5. Create Training Programs:\n" +
+                                "   - Πατήστε το κουμπί 'Create Training Programs'. Θα ανοίξει ένα παράθυρο όπου μπορείτε να δημιουργήσετε το δικό σας πρόγραμμα προπόνησης. Εισάγετε τα προσωπικά σας στοιχεία και στόχους, και πατήστε το κουμπί 'Generate Program' για να δείτε το πρόγραμμα που δημιουργήθηκε για εσάς.\n\n" +
+                                "6. Assess Physical Condition:\n" +
+                                "   - Πατήστε το κουμπί 'Assess Physical Condition'. Θα ανοίξει ένα παράθυρο αξιολόγησης της φυσικής σας κατάστασης. Εισάγετε τα δεδομένα όπως το ύψος, το βάρος, την ηλικία και άλλες παραμέτρους και πατήστε το κουμπί 'Calculate' για να δείτε την ανάλυση της φυσικής σας κατάστασης.\n\n" +
+                                "7. Interactive Games:\n" +
+                                "   - Πατήστε το κουμπί 'Interactive Games'. Θα ανοίξει ένα παράθυρο με διαδραστικά παιχνίδια. Επιλέξτε ένα από τα παιχνίδια για να δοκιμάσετε τις ικανότητές σας στην αντίδραση, τη μνήμη και άλλες δεξιότητες.\n\n" +
+                                "8. Start Working Out:\n" +
+                                "   - Πατήστε το κουμπί 'Start Working Out'. Θα ανοίξει ένα παράθυρο με επιλογές προπόνησης. Επιλέξτε τον τύπο προπόνησης (καρδιολογική ή με βάρη) και ακολουθήστε τις οδηγίες για να ξεκινήσετε την προπόνησή σας.\n\n" +
+                                "Χρησιμοποιήστε το μενού για να πλοηγηθείτε σε όλες τις διαθέσιμες λειτουργίες και να βελτιώσετε τη φυσική σας κατάσταση.",
+                        "Οδηγίες Χρήσης", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+
 
         interactNutritionistButton.addActionListener(new ActionListener() {
             @Override
