@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,14 +11,17 @@ public class Eshop extends JFrame {
     private JComboBox<Integer>[] quantitySelectors;
 
     public Eshop() {
-
         setTitle("Virtual Gym Eshop");
         setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(7, 3, 10, 10)); // Adjusted for the back button
+        mainPanel.setLayout(new BorderLayout(20, 20));
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        JPanel productPanel = new JPanel();
+        productPanel.setLayout(new GridLayout(6, 3, 10, 10));
 
         // Product names
         String[] productNames = {
@@ -44,13 +48,14 @@ public class Eshop extends JFrame {
         purchaseButtons = new JButton[productNames.length];
         quantitySelectors = new JComboBox[productNames.length];
 
-        // Populate the main panel with products
+        // Populate the product panel with products
         for (int i = 0; i < productNames.length; i++) {
-            // Load images
-            ImageIcon productIcon = new ImageIcon(imagePaths[i]);
+            // Load and resize images
+            ImageIcon productIcon = new ImageIcon(new ImageIcon(imagePaths[i]).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
 
             // Set up labels with images
             productLabels[i] = new JLabel(productIcon);
+            productLabels[i].setHorizontalAlignment(JLabel.CENTER);
 
             // Set up quantity selector
             quantitySelectors[i] = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
@@ -66,11 +71,14 @@ public class Eshop extends JFrame {
                 }
             });
 
-            // Add components to the main panel
-            mainPanel.add(productLabels[i]);
-            mainPanel.add(quantitySelectors[i]);
-            mainPanel.add(purchaseButtons[i]);
+            // Add components to the product panel
+            productPanel.add(productLabels[i]);
+            productPanel.add(quantitySelectors[i]);
+            productPanel.add(purchaseButtons[i]);
         }
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
 
         // Add the back button
         JButton backButton = new JButton("Back");
@@ -81,15 +89,38 @@ public class Eshop extends JFrame {
                 dispose();
             }
         });
-        mainPanel.add(new JLabel("")); // Placeholder for alignment
-        mainPanel.add(backButton);
-        mainPanel.add(new JLabel("")); // Placeholder for alignment
+        buttonPanel.add(backButton);
+
+        // Add the help button
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showHelpDialog();
+            }
+        });
+        buttonPanel.add(helpButton);
+
+        mainPanel.add(new JLabel("Virtual Gym Eshop", JLabel.CENTER), BorderLayout.NORTH);
+        mainPanel.add(productPanel, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
     }
 
     private void simulatePurchase(String item, int quantity) {
         JOptionPane.showMessageDialog(this, "You have purchased: " + item + " (Quantity: " + quantity + ")", "Purchase Confirmation", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void showHelpDialog() {
+        String helpMessage = "Welcome to the Virtual Gym Eshop!\n\n" +
+                "Here's how you can use this application:\n" +
+                "1. Browse through the products displayed.\n" +
+                "2. Select the quantity you wish to purchase from the dropdown.\n" +
+                "3. Click the 'Purchase' button next to the product to make a purchase.\n" +
+                "4. Click 'Back' to close the shop.\n" +
+                "5. If you need further assistance, click 'Help'.";
+        JOptionPane.showMessageDialog(this, helpMessage, "Help", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {

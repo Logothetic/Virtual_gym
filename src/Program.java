@@ -10,7 +10,8 @@ public class Program extends JFrame {
     private JComboBox<String> goalComboBox;
     private JTextArea outputArea;
     private JButton generateButton;
-    private JButton exitButton;  // Define the exit button
+    private JButton exitButton;
+    private JButton helpButton; // Define the help button
     private JLabel errorLabel;
 
     public Program() {
@@ -61,6 +62,16 @@ public class Program extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
+                dispose();
+            }
+        });
+
+        // Help button
+        helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showHelpDialog();
             }
         });
 
@@ -91,18 +102,22 @@ public class Program extends JFrame {
         mainPanel.add(generateButton, gbc);
 
         gbc.gridx = 1;
-        mainPanel.add(exitButton, gbc);  // Add the exit button
+        mainPanel.add(exitButton, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
-        mainPanel.add(errorLabel, gbc);
+        mainPanel.add(helpButton, gbc); // Add the help button
 
         gbc.gridx = 0;
         gbc.gridy = 5;
+        mainPanel.add(errorLabel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         mainPanel.add(outputLabel, gbc);
 
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         mainPanel.add(new JScrollPane(outputArea), gbc);
 
         add(mainPanel);
@@ -169,6 +184,17 @@ public class Program extends JFrame {
         }
 
         outputArea.setText(program);
+    }
+
+    private void showHelpDialog() {
+        JOptionPane.showMessageDialog(this,
+                "To use this application:\n" +
+                        "1. Enter your full name in the 'Name' field.\n" +
+                        "2. Enter your age in the 'Age' field.\n" +
+                        "3. Select your fitness goal from the dropdown menu.\n" +
+                        "4. Click 'Generate Program' to see your customized training program.\n" +
+                        "5. If you need to exit the application, click the 'Exit' button.",
+                "Help", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {
