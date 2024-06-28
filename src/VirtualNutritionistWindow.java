@@ -36,6 +36,7 @@ public class VirtualNutritionistWindow extends JFrame {
     private JComboBox<String> answerComboBox;
     private JButton nextButton;
     private JButton backButton;
+    private JButton helpButton;
     private String selectedGoal;
     private JFrame mainWindow;
 
@@ -137,10 +138,54 @@ public class VirtualNutritionistWindow extends JFrame {
         gbc.insets = new Insets(10, 0, 0, 0);
         questionPanel.add(backButton, gbc);
 
+        helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showHelpDialog();
+            }
+        });
+        gbc.gridy = 5;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        questionPanel.add(helpButton, gbc);
+
         mainPanel.add(questionPanel, gbc);
 
         // Add main panel to the frame
         add(mainPanel, BorderLayout.CENTER);
+    }
+
+    private void showHelpDialog() {
+        JDialog helpDialog = new JDialog(this, "Help", true);
+        helpDialog.setSize(400, 300);
+        helpDialog.setLocationRelativeTo(this);
+        helpDialog.setLayout(new BorderLayout());
+
+        JTextArea helpText = new JTextArea(
+                "Welcome to the Virtual Nutritionist!\n\n" +
+                        "This tool will ask you a series of questions to determine your dietary needs and goals.\n\n" +
+                        "1. Select the answer that best describes you for each question.\n" +
+                        "2. Click 'Next' to proceed to the next question.\n" +
+                        "3. If you need to go back to a previous question, click 'Back'.\n" +
+                        "4. Once all questions are answered, a personalized diet plan will be displayed.\n\n" +
+                        "Use the 'Back' button to return to the main window at any time."
+        );
+        helpText.setWrapStyleWord(true);
+        helpText.setLineWrap(true);
+        helpText.setEditable(false);
+        helpText.setOpaque(false);
+        helpText.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        helpDialog.add(new JScrollPane(helpText), BorderLayout.CENTER);
+
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(e -> helpDialog.dispose());
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(okButton);
+        helpDialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        helpDialog.setVisible(true);
     }
 
     private int getDietPlanIndex(String selectedGoal) {
