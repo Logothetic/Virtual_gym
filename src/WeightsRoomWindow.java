@@ -19,7 +19,7 @@ public class WeightsRoomWindow extends JFrame {
 
         // Weights room image
         JLabel weightsImageLabel = new JLabel();
-        ImageIcon weightsImageIcon = new ImageIcon("weight_room.jpg"); // Replace with the path to your weights room image
+        ImageIcon weightsImageIcon = new ImageIcon("weight_room.jpg");
         Image scaledImage = weightsImageIcon.getImage().getScaledInstance(800, 300, Image.SCALE_SMOOTH);
         weightsImageIcon = new ImageIcon(scaledImage);
         weightsImageLabel.setIcon(weightsImageIcon);
@@ -37,7 +37,7 @@ public class WeightsRoomWindow extends JFrame {
         buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add action listeners to buttons
+
         upperBodyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

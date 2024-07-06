@@ -19,7 +19,7 @@ public class CardioRoomWindow extends JFrame {
 
         // Cardio room image
         JLabel cardioImageLabel = new JLabel();
-        ImageIcon cardioImageIcon = new ImageIcon("cardio_room.jpg"); // Replace with the path to your cardio room image
+        ImageIcon cardioImageIcon = new ImageIcon("cardio_room.jpg");
         Image scaledImage = cardioImageIcon.getImage().getScaledInstance(800, 300, Image.SCALE_SMOOTH);
         cardioImageIcon = new ImageIcon(scaledImage);
         cardioImageLabel.setIcon(cardioImageIcon);

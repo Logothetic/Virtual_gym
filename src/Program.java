@@ -106,7 +106,7 @@ public class Program extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 4;
-        mainPanel.add(helpButton, gbc); // Add the help button
+        mainPanel.add(helpButton, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 5;

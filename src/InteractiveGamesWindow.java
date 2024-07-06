@@ -17,10 +17,10 @@ public class InteractiveGamesWindow extends JFrame {
         this.mainWindow = mainWindow;
 
         setTitle("Interactive Games and Exercises");
-        setSize(800, 600); // Initial size before maximizing
+        setSize(800, 600);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure the application exits on close
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Load background image
         try {
@@ -48,10 +48,10 @@ public class InteractiveGamesWindow extends JFrame {
         JButton game3Button = createStyledButton("Game 3: Simple Reflex Game", buttonFont);
         JButton backButton = createStyledButton("Back", buttonFont);
 
-        // Create and add components to the panel
+
         JPanel panel = new JPanel();
-        panel.setOpaque(true); // Ensure panel is not transparent
-        panel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background for better contrast
+        panel.setOpaque(true);
+        panel.setBackground(new Color(0, 0, 0, 180));
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         panel.setLayout(new GridBagLayout());
 
@@ -76,7 +76,7 @@ public class InteractiveGamesWindow extends JFrame {
         gbc.gridy = 4;
         panel.add(backButton, gbc);
 
-        // Add the panel to the background
+
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         background.add(panel, gbc);
@@ -121,8 +121,8 @@ public class InteractiveGamesWindow extends JFrame {
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        button.setHorizontalAlignment(SwingConstants.CENTER); // Center align the text
-        button.setPreferredSize(new Dimension(300, 50)); // Ensure consistent button size
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setPreferredSize(new Dimension(300, 50));
         return button;
     }
 
@@ -133,7 +133,7 @@ public class InteractiveGamesWindow extends JFrame {
 
         JPanel memoryPanel = new JPanel();
         memoryPanel.setLayout(new GridBagLayout());
-        memoryPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
+        memoryPanel.setBackground(new Color(0, 0, 0, 180));
 
         JLabel instructions = new JLabel("Remember the sequence of colors:");
         instructions.setFont(new Font("Arial", Font.BOLD, 20));
@@ -253,13 +253,13 @@ public class InteractiveGamesWindow extends JFrame {
 
         JPanel reactionPanel = new JPanel();
         reactionPanel.setLayout(new GridBagLayout());
-        reactionPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
+        reactionPanel.setBackground(new Color(0, 0, 0, 180));
 
         JLabel instructions = new JLabel("Click the button that lights up as fast as you can!");
         instructions.setFont(new Font("Arial", Font.BOLD, 16));
         instructions.setForeground(Color.WHITE);
         instructions.setHorizontalAlignment(SwingConstants.CENTER);
-        instructions.setPreferredSize(new Dimension(350, 30)); // Ensure instructions fit within the frame
+        instructions.setPreferredSize(new Dimension(350, 30));
 
         JButton[] buttons = new JButton[4];
         for (int i = 0; i < 4; i++) {
@@ -274,13 +274,13 @@ public class InteractiveGamesWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER; // Center align instructions
+        gbc.anchor = GridBagConstraints.CENTER;
         reactionPanel.add(instructions, gbc);
 
         for (int i = 0; i < 4; i++) {
             gbc.gridy = i + 1;
             gbc.gridwidth = 1;
-            gbc.anchor = GridBagConstraints.CENTER; // Center align buttons
+            gbc.anchor = GridBagConstraints.CENTER;
             reactionPanel.add(buttons[i], gbc);
         }
 
@@ -290,7 +290,7 @@ public class InteractiveGamesWindow extends JFrame {
         new Thread(() -> {
             try {
                 Random random = new Random();
-                int waitTime = random.nextInt(5000) + 2000; // Wait between 2 and 7 seconds
+                int waitTime = random.nextInt(5000) + 2000;
                 Thread.sleep(waitTime);
 
                 SwingUtilities.invokeLater(() -> {
@@ -325,7 +325,7 @@ public class InteractiveGamesWindow extends JFrame {
 
         JPanel reflexPanel = new JPanel();
         reflexPanel.setLayout(new GridBagLayout());
-        reflexPanel.setBackground(new Color(0, 0, 0, 180)); // Set semi-transparent black background
+        reflexPanel.setBackground(new Color(0, 0, 0, 180));
 
         JLabel instructions = new JLabel("Click the button when it changes color!");
         instructions.setFont(new Font("Arial", Font.BOLD, 20));
@@ -352,7 +352,7 @@ public class InteractiveGamesWindow extends JFrame {
         new Thread(() -> {
             try {
                 Random random = new Random();
-                int waitTime = random.nextInt(5000) + 2000; // Wait between 2 and 7 seconds
+                int waitTime = random.nextInt(5000) + 2000;
                 Thread.sleep(waitTime);
 
                 SwingUtilities.invokeLater(() -> {

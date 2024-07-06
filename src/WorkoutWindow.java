@@ -19,7 +19,7 @@ public class WorkoutWindow extends JFrame {
 
         // Gym image
         JLabel gymImageLabel = new JLabel();
-        ImageIcon gymImageIcon = new ImageIcon("gym.jpg"); // Replace with the path to your gym image
+        ImageIcon gymImageIcon = new ImageIcon("gym.jpg");
         Image scaledImage = gymImageIcon.getImage().getScaledInstance(800, 300, Image.SCALE_SMOOTH);
         gymImageIcon = new ImageIcon(scaledImage);
         gymImageLabel.setIcon(gymImageIcon);
@@ -39,7 +39,7 @@ public class WorkoutWindow extends JFrame {
         buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add action listeners to buttons
+
         cardioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

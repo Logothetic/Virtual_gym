@@ -33,7 +33,7 @@ public class Eshop extends JFrame {
                 "Nutrition Program"
         };
 
-        // Product images (assuming you have images named as product1.png, product2.png, etc.)
+
         String[] imagePaths = {
                 "dumbell.jpg",
                 "jump_rope.jpg",
@@ -48,16 +48,14 @@ public class Eshop extends JFrame {
         purchaseButtons = new JButton[productNames.length];
         quantitySelectors = new JComboBox[productNames.length];
 
-        // Populate the product panel with products
         for (int i = 0; i < productNames.length; i++) {
-            // Load and resize images
             ImageIcon productIcon = new ImageIcon(new ImageIcon(imagePaths[i]).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
 
             // Set up labels with images
             productLabels[i] = new JLabel(productIcon);
             productLabels[i].setHorizontalAlignment(JLabel.CENTER);
 
-            // Set up quantity selector
+
             quantitySelectors[i] = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
 
             // Set up buttons
@@ -71,7 +69,7 @@ public class Eshop extends JFrame {
                 }
             });
 
-            // Add components to the product panel
+
             productPanel.add(productLabels[i]);
             productPanel.add(quantitySelectors[i]);
             productPanel.add(purchaseButtons[i]);
@@ -91,7 +89,7 @@ public class Eshop extends JFrame {
         });
         buttonPanel.add(backButton);
 
-        // Add the help button
+
         JButton helpButton = new JButton("Help");
         helpButton.addActionListener(new ActionListener() {
             @Override

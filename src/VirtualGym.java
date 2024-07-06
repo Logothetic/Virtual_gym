@@ -11,25 +11,25 @@ public class VirtualGym extends JFrame {
 
         // Set up the main frame
         setTitle("Virtual Gym");
-        setSize(800, 600); // Initial size before maximizing
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
         // Load the gym icon
-        ImageIcon gymIcon = new ImageIcon("welcome.png"); // Replace with the path to your gym icon
+        ImageIcon gymIcon = new ImageIcon("welcome.png");
         JLabel iconLabel = new JLabel(gymIcon);
         add(iconLabel, BorderLayout.CENTER);
 
         // Create "READ ME" button
-        JButton readMeButton = new JButton("READ ME");
+        JButton readMeButton = new JButton("HELP");
         readMeButton.setFont(new Font("Arial", Font.BOLD, 24));
         add(readMeButton, BorderLayout.NORTH);
 
         // Create buttons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 3, 10, 10)); // Use GridLayout for more buttons
+        buttonPanel.setLayout(new GridLayout(3, 3, 10, 10));
 
         JButton exercisesAndAdviceButton = new JButton("Exercises & Advice");
         JButton trackProgressButton = new JButton("Track Progress");
@@ -47,7 +47,7 @@ public class VirtualGym extends JFrame {
         buttonPanel.add(createTrainingProgramsButton);
         buttonPanel.add(assessPhysicalConditionButton);
         buttonPanel.add(interactiveGamesButton);
-        buttonPanel.add(startWorkoutButton); // Add new button to the panel
+        buttonPanel.add(startWorkoutButton);
 
         add(buttonPanel, BorderLayout.SOUTH);
 

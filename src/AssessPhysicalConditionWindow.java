@@ -20,10 +20,10 @@ public class AssessPhysicalConditionWindow extends JFrame {
         this.mainWindow = mainWindow;
 
         setTitle("Assess Physical Condition");
-        setSize(800, 800); // Initial size before maximizing
+        setSize(800, 800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Set background image
         JLabel background = new JLabel(new ImageIcon("fitness_assessment.jpg"));
@@ -44,13 +44,13 @@ public class AssessPhysicalConditionWindow extends JFrame {
         resultTextPane.setContentType("text/html");
         resultTextPane.setEditable(false);
 
-        // Set font styles
+
         Font labelFont = new Font("Arial", Font.PLAIN, 14);
 
         // Create and add components to the panel
         JPanel panel = new JPanel();
         panel.setOpaque(true); // Ensure panel is not transparent
-        panel.setBackground(new Color(255, 255, 255, 180)); // Set semi-transparent white background
+        panel.setBackground(new Color(255, 255, 255, 180));
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         panel.setLayout(new GridBagLayout());
 
@@ -147,7 +147,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(backButton, gbc);
 
-        // Add the result text pane to a scroll pane
+
         JScrollPane scrollPane = new JScrollPane(resultTextPane);
         scrollPane.setPreferredSize(new Dimension(700, 300));
 
@@ -156,12 +156,12 @@ public class AssessPhysicalConditionWindow extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         panel.add(scrollPane, gbc);
 
-        // Add the panel to the background
+
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         background.add(panel, gbc);
 
-        // Add action listener to calculate button
+
         calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -169,7 +169,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
             }
         });
 
-        // Add action listener to back button
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
