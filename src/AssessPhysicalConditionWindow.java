@@ -26,7 +26,7 @@ public class AssessPhysicalConditionWindow extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
 
         // Set background image
-        JLabel background = new JLabel(new ImageIcon("C:\\Users\\Odysseas\\IdeaProjects\\Virtual\\fitness_assessment.jpg"));
+        JLabel background = new JLabel(new ImageIcon("fitness_assessment.jpg"));
         background.setLayout(new GridBagLayout());
         setContentPane(background);
 
